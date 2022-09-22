@@ -1,7 +1,9 @@
 require('dotenv').config();
-const express = require('express')
+const express = require('express');
+const Quote = require('./models/quote');
 const app = express()
 const PORT = process.env.PORT;
+const quotesRepository = require('./repository/daos/quotesDao')
 
 app.use(express.json());
 
@@ -29,7 +31,9 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-    console.log(req.body);
+    let quote = new Quote(req.body.bondName, req.body.date, req.body.time, req.body.lastPrice, req.body.closePrice, req.body.volume);
+    quotesRepository.subirInfo(quote);
+    res.json({"message": "Hello, World"})
 })
 
 app.listen(PORT, () => {
