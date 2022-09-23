@@ -48,7 +48,7 @@ class CrudMongo {
             let nuevoObjeto = await this.model.create(objeto);
             return nuevoObjeto
         } catch (e) {
-            logger.error('cant subir info')
+            logger.error('cant subir info' + e)
             // return error.errorProcess("CRUD Error", `El Crud ha tenido un error -> ` + e.message, res);
         }
     }

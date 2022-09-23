@@ -7,9 +7,9 @@ const quotesSchema = new Schema ({
     bondName: {type: String},
     date: {type: String},
     time: {type: String},
-    lastPrice: {type: Number},
-    closePrice: {type: Number},
-    volume: {type: Number}
+    lastPrice: {type: mongoose.Types.Decimal128},
+    closePrice: {type: mongoose.Types.Decimal128},
+    volume: {type: mongoose.Types.Decimal128}
 })
 
 const Quotes = mongoose.model(coleccion, quotesSchema);
