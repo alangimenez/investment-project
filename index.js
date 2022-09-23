@@ -4,6 +4,7 @@ const app = express()
 const PORT = process.env.PORT;
 const cashFlowRouter = require('./router/cashFlowRouter');
 const quotesRouter = require('./router/quotesRouter');
+const tirRouter = require('./router/tirRouter');
 
 // middlewares and config
 app.use(express.json());
@@ -27,8 +28,9 @@ app.use(function (req, res, next) {
 });
 
 // routers
-app.use('/', cashFlowRouter);
-app.use('/', quotesRouter)
+app.use('/cashflow', cashFlowRouter);
+app.use('/quotes', quotesRouter);
+app.use('/tir', tirRouter)
 
 // app running
 app.listen(PORT, () => {

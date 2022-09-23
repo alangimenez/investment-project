@@ -10,6 +10,10 @@ class LastValueService {
     async saveInfo(lastValue) {
         await lastValueRepository.subirInfo(lastValue)
     }
+
+    async getInfoByBondName(bondName) {
+        await lastValueRepository.leerInfoPorBondname(bondName)
+    }
 }
 
 const lastValueService = new LastValueService()
