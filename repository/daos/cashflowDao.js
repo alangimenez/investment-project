@@ -9,6 +9,6 @@ class cashflowDao extends CrudMongo {
     }
 }
 
-module.exports = {
-    cashflowDao
-}
+let cashFlowSingleton = new cashflowDao()
+
+module.exports = cashFlowSingleton

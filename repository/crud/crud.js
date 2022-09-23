@@ -43,6 +43,15 @@ class CrudMongo {
         }
     }
 
+    async leerInfoPorBondname(bondName) {
+        try {
+            return await this.model.find({ bondName: bondName }, { __v: 0 });
+        } catch (e) {
+            logger.error('cant leer info por id')
+            // return error.errorProcess("CRUD Error", `El Crud ha tenido un error -> ` + e.message);
+        }
+    }
+
     async subirInfo(objeto) {
         try {
             let nuevoObjeto = await this.model.create(objeto);
@@ -53,10 +62,19 @@ class CrudMongo {
         }
     }
 
-    async eliminarInfo(id) {
+    async eliminarInfo(bondName) {
         try {
-            const result = await this.model.deleteOne({ id: id });
+            const result = await this.model.deleteOne({ bondName: bondName });
             return this.leerInfo();
+        } catch (e) {
+            logger.error('cant eliminar info')
+            // return error.errorProcess("CRUD Error", `El Crud ha tenido un error -> ` + e.message, res);
+        }
+    }
+
+    async eliminarTodos(bondName) {
+        try {
+            return await this.model.deleteMany({ bondName: bondName });
         } catch (e) {
             logger.error('cant eliminar info')
             // return error.errorProcess("CRUD Error", `El Crud ha tenido un error -> ` + e.message, res);

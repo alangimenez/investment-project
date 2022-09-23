@@ -5,7 +5,7 @@ const coleccion = 'cashflow';
 
 const cashflowSchema = new Schema ({
     bondName: {type: String},
-    date: {type: Array}
+    cashFlow: {type: Array}
 })
 
 const Cashflow = mongoose.model(coleccion, cashflowSchema);

@@ -1,12 +1,12 @@
 require('dotenv').config();
 const express = require('express');
-const Quote = require('./models/quote');
 const app = express()
 const PORT = process.env.PORT;
-const quotesRepository = require('./repository/daos/quotesDao')
+const cashFlowRouter = require('./router/cashFlowRouter');
+const quotesRouter = require('./router/quotesRouter');
 
+// middlewares and config
 app.use(express.json());
-
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
@@ -26,32 +26,11 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/', (req, res) => {
-  res.json({"message": "Hello world"})
-})
+// routers
+app.use('/', cashFlowRouter);
+app.use('/', quotesRouter)
 
-app.post('/', (req, res) => {
-  console.log(req.body.quotes.length);
-  const tiempoTranscurrido = Date.now();
-  const hoy = new Date(tiempoTranscurrido);
-  for (let i = 0; i < /* req.body.quotes.length*/ 5; i++) {
-    let quote = new Quote(
-      req.body.quotes[i].name,
-      hoy.toLocaleDateString(),
-      hoy.toLocaleTimeString(),
-      parseFloat(req.body.quotes[i].value),
-      parseFloat(req.body.quotes[i].lastPrice),
-      parseFloat(req.body.quotes[i].volumen)
-    )
-    quotesRepository.subirInfo(quote);
-  }
-  res.json(req.body.quotes);
-
-    // let quote = new Quote(req.body.bondName, req.body.date, req.body.time, req.body.lastPrice, req.body.closePrice, req.body.volume);
-    // quotesRepository.subirInfo(quote);
-    // res.json({"message": "Hello, World"})
-})
-
+// app running
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)
 })
