@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-const coleccion = 'lastvalue';
+const coleccion = 'lastvalues';
 
 const lastValueSchema = new Schema ({
     bondName: {type: String},

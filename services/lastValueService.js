@@ -12,7 +12,7 @@ class LastValueService {
     }
 
     async getInfoByBondName(bondName) {
-        await lastValueRepository.leerInfoPorBondname(bondName)
+        return await lastValueRepository.leerInfoPorBondname(bondName)
     }
 }
 

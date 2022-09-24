@@ -3,7 +3,7 @@ const router = express.Router();
 const { irr } = require('node-irr');
 const cashFlowService = require('../services/cashFlowService');
 
-router.get('/cashflow', async (req, res) => {
+router.get('/', async (req, res) => {
     
     /* data[0].cashFlow.unshift(-102.50)
     console.log(irr(data[0].cashFlow))
@@ -16,7 +16,7 @@ router.get('/cashflow', async (req, res) => {
     res.status(200).json(await cashFlowService.getCashFlow(req.body.bondName));
 })
 
-router.post('/cashflow', async (req, res) => {
+router.post('/', async (req, res) => {
     let result = await cashFlowService.saveCashFlow(req.body.bondName, req.body.cashFlow);
     if (result.bondName == req.body.bondName) {
         res.status(201).json({"message": "ok"})
