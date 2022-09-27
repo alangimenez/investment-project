@@ -7,7 +7,7 @@ const tirSchema = new Schema ({
     bondName: {type: String},
     date: {type: String},
     time: {type: String},
-    tir: {type: Number}
+    tir: {type: mongoose.Types.Decimal128}
 })
 
 const Tir = mongoose.model(coleccion, tirSchema);

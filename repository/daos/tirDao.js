@@ -9,6 +9,6 @@ class tirDao extends CrudMongo {
     }
 }
 
-module.exports = {
-    tirDao
-}
+let tirSingleton = new tirDao()
+
+module.exports = tirSingleton
