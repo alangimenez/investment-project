@@ -1,3 +1,4 @@
+const Cashflow = require('../models/database/cashflowMg')
 const cashFlowRepository = require('../repository/daos/cashflowDao')
 
 class CashFlowService {
@@ -6,10 +7,14 @@ class CashFlowService {
         return await cashFlowRepository.leerInfoPorBondname(bondName)
     }
 
-    async saveCashFlow(bondName, cashFlow) {
+    async saveCashFlow(cashFlow) {
         return await cashFlowRepository.subirInfo({
-            "bondName": bondName,
-            "cashFlow": cashFlow
+            "bondName": cashFlow.bondName,
+            "company": cashFlow.company,
+            "start": cashFlow.start,
+            "finish": cashFlow.finish,
+            "rate": cashFlow.rate,
+            "cashFlow": cashFlow.cashFlow
         })
     }
 }

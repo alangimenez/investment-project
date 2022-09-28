@@ -1,4 +1,4 @@
-class Tir {
+class TirModel {
     constructor(bondName, date, time, tir) {
         this.bondName = bondName;
         this.date = date;
@@ -7,4 +7,4 @@ class Tir {
       }
 }
 
-module.exports = Tir
+module.exports = TirModel

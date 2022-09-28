@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    let result = await cashFlowService.saveCashFlow(req.body.bondName, req.body.cashFlow);
+    let result = await cashFlowService.saveCashFlow(req.body);
     if (result.bondName == req.body.bondName) {
         res.status(201).json({"message": "ok"})
     } else {
