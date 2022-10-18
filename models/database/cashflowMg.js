@@ -9,7 +9,8 @@ const cashflowSchema = new Schema ({
     start: {type: String},
     finish: {type: String},
     rate: {type: mongoose.Types.Decimal128},
-    cashFlow: {type: Array}
+    dateInterest: {type: Array},
+    amountInterest: {type: Array}
 })
 
 const Cashflow = mongoose.model(coleccion, cashflowSchema);

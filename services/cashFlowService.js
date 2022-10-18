@@ -14,7 +14,8 @@ class CashFlowService {
             "start": cashFlow.start,
             "finish": cashFlow.finish,
             "rate": cashFlow.rate,
-            "cashFlow": cashFlow.cashFlow
+            "dateInterest": cashFlow.dateInterest,
+            "amountInterest": cashFlow.amountInterest
         })
     }
 }

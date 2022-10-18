@@ -4,6 +4,8 @@ const { irr } = require('node-irr');
 const TirModel = require('../models/tirModel')
 const TirResponse = require('../models/tirResponse')
 const tirRepository = require('../repository/daos/tirDao')
+const moment = require('moment'); // require
+moment().format(); 
 
 class TirService {
     constructor() {}
@@ -38,8 +40,31 @@ class TirService {
         return arrayTir;
     }
 
+    async getTirDaily() {
+        const cashFlowsData = await cashFlowRepository.leerInfo() // ir a service de cashFlow
+        console.log(cashFlowsData[2].finish)
+        const daysDiff = this.diffInDaysBetweenDateAndToday(new Date(cashFlowsData[2].finish))
+        const cashFlow = new Array(daysDiff);
+        
+        const days = []
+        for (let i = 0; i < cashFlowsData[2].dateInterest.length; i++) {
+            console.log(cashFlowsData[2].dateInterest[i])
+            days.push(this.diffInDaysBetweenDateAndToday(new Date(cashFlowsData[2].dateInterest[i])))
+            cashFlow[this.diffInDaysBetweenDateAndToday(new Date(cashFlowsData[2].dateInterest[i]))] = cashFlowsData[2].amountInterest[i]
+        }
+        console.log(days);
+        console.log(cashFlow);
+    }
+
     roundToTwo(num) {
         return +(Math.round(num + "e+4")  + "e-4");
+    }
+
+    diffInDaysBetweenDateAndToday(date) {
+        const today = new Date()
+        const finishDate = moment([date.getFullYear(), date.getMonth(), date.getDate()])
+        const todayMoment = moment([today.getFullYear(), today.getMonth(), today.getDate()])
+        return finishDate.diff(todayMoment, 'days')
     }
 }
 
