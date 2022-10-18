@@ -44,16 +44,23 @@ class TirService {
         const cashFlowsData = await cashFlowRepository.leerInfo() // ir a service de cashFlow
         console.log(cashFlowsData[2].finish)
         const daysDiff = this.diffInDaysBetweenDateAndToday(new Date(cashFlowsData[2].finish))
+
         const cashFlow = new Array(daysDiff);
+        for (let j = 0; j < cashFlow.length; j++) {
+            cashFlow[j] = 0
+        }
         
-        const days = []
         for (let i = 0; i < cashFlowsData[2].dateInterest.length; i++) {
-            console.log(cashFlowsData[2].dateInterest[i])
-            days.push(this.diffInDaysBetweenDateAndToday(new Date(cashFlowsData[2].dateInterest[i])))
             cashFlow[this.diffInDaysBetweenDateAndToday(new Date(cashFlowsData[2].dateInterest[i]))] = cashFlowsData[2].amountInterest[i]
         }
-        console.log(days);
-        console.log(cashFlow);
+
+        const lastValueBond = await lastValueService.getInfoByBondName(cashFlowsData[2].bondName);
+        cashFlow.unshift(-(lastValueBond[0].closePrice -1 +1))
+
+        let tirDaily = irr(cashFlow)
+        let tirAnnual = Math.pow(1+tirDaily, 365)
+        let tirAnnualRound = this.roundToTwo(((tirAnnual)-1))
+        console.log(tirAnnualRound)
     }
 
     roundToTwo(num) {
